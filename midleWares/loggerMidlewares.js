@@ -1,0 +1,36 @@
+ const loggerMidleware = (req, res, next) =>{
+
+    const timestamp = new Date().toLocaleString()
+
+    console.log(`[${timestamp}, ${req.method}, ${req.url}, IP: ${req.ip}]`)
+
+    const start = Date.now()
+
+    res.on('finish', ()=>{
+        const duration = Date.now() - start
+        
+        console.log(`[${timestamp}, Response: ${res.statusCode} - ${duration}]`)
+    })
+
+next()
+
+
+ }
+
+
+
+module.exports = loggerMidleware
+
+
+
+
+
+
+
+
+
+
+
+
+
+
